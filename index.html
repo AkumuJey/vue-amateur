@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Vues</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box{
+            background-color: lightblue;
+            padding: 100px 0;
+            text-align: center;
+            width: 400px;
+            display: block;
+            margin: 20px;
+        }
+        body {
+            background-color: beige;
+        }
+        li{
+            display: flex;
+            background-color: aquamarine;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+        li.fav{
+            background-color: black;
+            color: white;
+            margin: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Hellow, Vue:)</h1>
+    <div id="app">
+        <div>
+            <a :href="url">This is the best website</a>
+        </div>
+       <div v-if="showBooks">
+        <ul>
+            <li v-for="book in books" :class="{fav: book.isFav}">
+                <p>{{ book.School }} is {{ book.age }} years old and is headed by  {{ book.principal }}</p>
+                <button @click="toggleFav(book)">
+                    <span v-if="book.isFav">&#128077</span>
+                    <span v-else>&#128078</span>
+                </button>
+            </li>
+            <div>
+                <h1>These Are the Schools</h1>
+                <li v-for="book in filteredBooks" :class="{fav: book.isFav}">
+                    <p>{{ book.School }} is {{ book.age }} years old and is headed by  {{ book.principal }}</p>
+                    <button @click="toggleFav(book)">
+                        <span v-if="book.isFav">&#128077</span>
+                        <span v-else>&#128078</span>
+                    </button>
+                </li>
+            </div>
+        </ul>
+        <button v-on:click="age++">Increase Age</button>
+        <button v-on:click="age--">Deccrease Age</button>
+        <div @click="changeTitle">Click Me to change the title</div>
+       </div>
+       <button @click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-if="!showBooks">Show Books</span>
+        </button>
+        <div v-show="showBooks">Currently Showing Books</div>
+        <div v-show="!showBooks">Not Showing Books</div>
+        <div class="box" @mouseover="handleEvent">Mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">Mouseleaver</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box" @mousemove="handleMousemove">Position {{x}} {{y}} </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
